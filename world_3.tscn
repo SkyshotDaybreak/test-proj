@@ -1,0 +1,146 @@
+[gd_scene load_steps=24 format=3 uid="uid://dkphrmuoe8o00"]
+
+[ext_resource type="PackedScene" uid="uid://bga73sssu6xhm" path="res://player.tscn" id="1_cmrgr"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_ihwud"]
+[ext_resource type="Resource" path="res://data.hterrain" id="3_0tmh8"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_44oo1"]
+[ext_resource type="Texture2D" uid="uid://oye47gunwitu" path="res://world_3_slot0_albedo_bump.png" id="5_6w742"]
+[ext_resource type="Texture2D" uid="uid://d4n25ldbc18gg" path="res://world_3_slot0_normal_roughness.png" id="6_6xfbo"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="7_hwp7g"]
+[ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="8_a3e1j"]
+[ext_resource type="Texture2D" uid="uid://dvghnysgib3hv" path="res://leaves.jpg" id="8_ta6as"]
+[ext_resource type="PackedScene" uid="uid://c4qajtd2j7hce" path="res://sjekfhdlfjh/lammy.tscn" id="10_7c0gj"]
+[ext_resource type="Texture2D" uid="uid://c80tdqe3imug8" path="res://skys/PaleMoonlight/PaleMoonlight1.png" id="10_duc7l"]
+[ext_resource type="PackedScene" uid="uid://3kmhuto2q8oe" path="res://mushroom.tscn" id="12_72vhe"]
+[ext_resource type="AudioStream" uid="uid://b035gdrbd7mlc" path="res://Portal2-1x20-I_Made_It_All_Up.mp3" id="13_b4lqn"]
+[ext_resource type="Texture2D" uid="uid://dpc1f52dg046k" path="res://skys/1024px-Log_paper.svg.png" id="14_tnmek"]
+[ext_resource type="Script" path="res://orb.gd" id="15_a5q2o"]
+[ext_resource type="Shader" path="res://test.gdshader" id="16_k6q2p"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_02518"]
+panorama = ExtResource("10_duc7l")
+
+[sub_resource type="Sky" id="Sky_1nu2j"]
+sky_material = SubResource("PanoramaSkyMaterial_02518")
+
+[sub_resource type="Environment" id="Environment_vsg0t"]
+background_mode = 2
+background_energy_multiplier = 0.79
+sky = SubResource("Sky_1nu2j")
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_light_energy = 0.68
+fog_density = 0.0233
+fog_aerial_perspective = 0.854
+volumetric_fog_density = 0.01
+
+[sub_resource type="Resource" id="Resource_kfxfj"]
+script = ExtResource("4_44oo1")
+mode = 0
+textures = [[ExtResource("5_6w742"), ExtResource("8_ta6as")], [ExtResource("6_6xfbo"), null]]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_m31au"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_imgrc"]
+render_priority = 0
+shader = ExtResource("16_k6q2p")
+shader_parameter/freq = 1.0
+shader_parameter/xAmp = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_yjehq"]
+
+[node name="world3" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.32754, -1.21928, -1.43311)
+
+[node name="player" parent="." instance=ExtResource("1_cmrgr")]
+transform = Transform3D(-0.998556, 0, 0.0537129, 0, 1, 0, -0.0537129, 0, -0.998556, 67.6328, -39.0682, 99.4521)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vsg0t")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("10_7c0gj")]
+transform = Transform3D(-0.35, 0, -5.28485e-08, 0, 0.35, 0, 5.28485e-08, 0, -0.35, 48.1987, -35.6305, 124.664)
+collision_layer = 5
+
+[node name="HTerrain2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -82, 0)
+script = ExtResource("2_ihwud")
+_terrain_data = ExtResource("3_0tmh8")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_kfxfj")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+
+[node name="HTerrainDetailLayer" type="Node3D" parent="HTerrain2"]
+script = ExtResource("7_hwp7g")
+shader_params/u_globalmap_tint_bottom = null
+shader_params/u_globalmap_tint_top = null
+shader_params/u_bottom_ao = null
+shader_params/u_instance_scale = null
+shader_params/u_roughness = null
+metadata/_editor_icon = ExtResource("8_a3e1j")
+
+[node name="lights" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 503, 0)
+light_color = Color(0.556863, 1, 0.992157, 1)
+light_energy = 0.1
+shadow_enabled = true
+shadow_blur = 8.208
+
+[node name="Node3D" parent="lights" instance=ExtResource("12_72vhe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.8458, -35.9519, 121.083)
+
+[node name="Node3D2" parent="lights" instance=ExtResource("12_72vhe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.6275, -35.6855, 121.389)
+
+[node name="Node3D3" parent="lights" instance=ExtResource("12_72vhe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.0819, -37.7204, 137.784)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_b4lqn")
+autoplay = true
+
+[node name="skygrid1" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 718.21, 0)
+cast_shadow = 0
+gi_mode = 0
+pixel_size = 11.21
+axis = 1
+alpha_cut = 1
+texture_filter = 2
+texture = ExtResource("14_tnmek")
+
+[node name="skygrid2" type="Sprite3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 2725, 0)
+cast_shadow = 0
+pixel_size = 8.4458
+axis = 1
+alpha_cut = 1
+texture_filter = 2
+texture = ExtResource("14_tnmek")
+
+[node name="orb" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.3642, -36.0181, 139.1)
+collision_layer = 6
+input_capture_on_drag = true
+freeze = true
+script = ExtResource("15_a5q2o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="orb"]
+shape = SubResource("SphereShape3D_m31au")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="orb"]
+material_override = SubResource("ShaderMaterial_imgrc")
+mesh = SubResource("SphereMesh_yjehq")

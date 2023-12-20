@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://btx5nhto772m8"
+path="res://.godot/imported/the Microphones - the Glow pt. 2 - 09 (something).mp3-22f4e949ced59f63e4ad451f219b52ba.mp3str"
+
+[deps]
+
+source_file="res://skys/the Microphones - the Glow pt. 2 - 09 (something).mp3"
+dest_files=["res://.godot/imported/the Microphones - the Glow pt. 2 - 09 (something).mp3-22f4e949ced59f63e4ad451f219b52ba.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

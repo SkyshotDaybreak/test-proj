@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://dx0vtr3swgatw"]
+
+[ext_resource type="Texture2D" uid="uid://4ggbu33k61yu" path="res://skys/bliss_skybox.png" id="1_eqqgo"]
+[ext_resource type="PackedScene" uid="uid://bga73sssu6xhm" path="res://player.tscn" id="1_l5npr"]
+[ext_resource type="Texture2D" uid="uid://5umq8jj7k3md" path="res://sjekfhdlfjh/bkMaze.png" id="3_n4p78"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_2byml"]
+panorama = ExtResource("1_eqqgo")
+
+[sub_resource type="Sky" id="Sky_b1n3m"]
+sky_material = SubResource("PanoramaSkyMaterial_2byml")
+
+[sub_resource type="Environment" id="Environment_pe7e3"]
+background_mode = 2
+sky = SubResource("Sky_b1n3m")
+ambient_light_source = 1
+ambient_light_energy = 3.65
+reflected_light_source = 1
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nfsjc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t51s2"]
+albedo_texture = ExtResource("3_n4p78")
+uv1_scale = Vector3(57, 57, 57)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1oj8y"]
+material = SubResource("StandardMaterial3D_t51s2")
+
+[sub_resource type="PrismMesh" id="PrismMesh_x8ny7"]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_pe7e3")
+
+[node name="Player" parent="." instance=ExtResource("1_l5npr")]
+transform = Transform3D(0.999999, 0.000915253, 0.000680512, -0.000915512, 1, 0.000386344, -0.000680163, -0.000386958, 1, 4.41347, 15.5486, 3.30843)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.531906, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_nfsjc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(9.905, 0, 0, 0, 9.905, 0, 0, 0, 9.905, 0, 0, 0)
+mesh = SubResource("PlaneMesh_1oj8y")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53191, 0)
+visible = false
+light_energy = 4.99
+omni_range = 18.6688
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 117.532, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 3.53191, 6)
+mesh = SubResource("PrismMesh_x8ny7")

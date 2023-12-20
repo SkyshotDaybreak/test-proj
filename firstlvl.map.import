@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://b5kf4cx2ee44n"
+path="res://.godot/imported/firstlvl.map-4c7bd724b0ba47bb599e0c98831d06a8.tres"
+
+[deps]
+
+source_file="res://firstlvl.map"
+dest_files=["res://.godot/imported/firstlvl.map-4c7bd724b0ba47bb599e0c98831d06a8.tres"]
+
+[params]
+

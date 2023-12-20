@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://bga73sssu6xhm"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_8l8xe"]
+[ext_resource type="Script" path="res://casting.gd" id="2_6iyp5"]
+[ext_resource type="PackedScene" uid="uid://b2i3ou871aw1x" path="res://cursor.tscn" id="3_m6qed"]
+[ext_resource type="PackedScene" uid="uid://bbl0pcbxkv67y" path="res://thought.tscn" id="4_c6x56"]
+[ext_resource type="PackedScene" uid="uid://bnlstyysotuji" path="res://sky_online.tscn" id="5_lgewc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hd4jc"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o274v"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_8l8xe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_hd4jc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.719004, 0)
+fov = 90.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.0597948, 0)
+target_position = Vector3(0, -3, 0)
+collision_mask = 4
+debug_shape_thickness = 4
+script = ExtResource("2_6iyp5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_o274v")
+
+[node name="cursor" parent="." instance=ExtResource("3_m6qed")]
+
+[node name="thought" parent="." instance=ExtResource("4_c6x56")]
+
+[node name="sky online" parent="." instance=ExtResource("5_lgewc")]
+visible = false
+
+[connection signal="interact_enter" from="Camera3D/RayCast3D" to="cursor" method="_on_ray_cast_3d_interact_enter"]
+[connection signal="interact_exit" from="Camera3D/RayCast3D" to="cursor" method="_on_ray_cast_3d_interact_exit"]
+[connection signal="interacting" from="Camera3D/RayCast3D" to="thought" method="_on_ray_cast_3d_interacting"]

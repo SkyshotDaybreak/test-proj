@@ -1,0 +1,182 @@
+[gd_scene load_steps=24 format=3 uid="uid://bwbm6ks3i1db2"]
+
+[ext_resource type="PackedScene" uid="uid://bga73sssu6xhm" path="res://player.tscn" id="1_8tcec"]
+[ext_resource type="Texture2D" uid="uid://mo12hh27tiah" path="res://sjekfhdlfjh/bkGray.png" id="1_bytwg"]
+[ext_resource type="Texture2D" uid="uid://5umq8jj7k3md" path="res://sjekfhdlfjh/bkMaze.png" id="3_bp2q0"]
+[ext_resource type="Texture2D" uid="uid://7rrgbvo7n8hx" path="res://sjekfhdlfjh/jer.JPG" id="4_psc8c"]
+[ext_resource type="Shader" path="res://test.gdshader" id="5_2p27x"]
+[ext_resource type="Texture2D" uid="uid://cdbe1l0c27quh" path="res://sjekfhdlfjh/NpcRegu_CurlyStory.png" id="5_w7qs8"]
+[ext_resource type="PackedScene" uid="uid://bl4um3twh5j0q" path="res://sjekfhdlfjh/priscilla.tscn" id="6_ppunc"]
+[ext_resource type="PackedScene" uid="uid://c4qajtd2j7hce" path="res://sjekfhdlfjh/lammy.tscn" id="7_tjhhn"]
+[ext_resource type="AudioStream" uid="uid://vrrghhmpdfbj" path="res://skys/Portal2-3x06-TEST.mp3" id="8_smbrw"]
+
+[sub_resource type="Sky" id="Sky_lcmrt"]
+
+[sub_resource type="Environment" id="Environment_y0dqf"]
+background_mode = 2
+background_color = Color(0.72549, 0.921569, 1, 0.188235)
+background_energy_multiplier = 10.35
+sky = SubResource("Sky_lcmrt")
+fog_light_energy = 1.48
+volumetric_fog_density = 0.0095
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_62pq2"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxcjo"]
+albedo_texture = ExtResource("1_bytwg")
+uv1_scale = Vector3(16.115, 16.115, 16.115)
+
+[sub_resource type="BoxMesh" id="BoxMesh_chl6c"]
+material = SubResource("StandardMaterial3D_qxcjo")
+size = Vector3(60, 2, 60)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2lr5d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ono5p"]
+albedo_texture = ExtResource("3_bp2q0")
+uv1_scale = Vector3(14.705, 14.705, 14.705)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ich28"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tm2h3"]
+render_priority = 0
+shader = ExtResource("5_2p27x")
+shader_parameter/freq = 1.0
+shader_parameter/xAmp = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_xaevg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80koe"]
+atlas = ExtResource("5_w7qs8")
+region = Rect2(0, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp0xl"]
+atlas = ExtResource("5_w7qs8")
+region = Rect2(32, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xre2"]
+atlas = ExtResource("5_w7qs8")
+region = Rect2(64, 224, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tx8xg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80koe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wp0xl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xre2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_y0dqf")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_62pq2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_chl6c")
+
+[node name="RedLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, 0, -22.3629, 0)
+light_color = Color(0.760784, 0.0313726, 0.129412, 1)
+light_energy = 0.102
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+sky_mode = 1
+
+[node name="TopLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.480162, -0.770902, -0.418514, 1.33698e-08, -0.477113, 0.878842, -0.87718, -0.421986, -0.229092, -70.8361, 172.948, -7.54322)
+light_color = Color(0.894118, 0.631373, 0.482353, 1)
+light_energy = 4.26
+shadow_enabled = true
+shadow_blur = 5.571
+sky_mode = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TopLight"]
+transform = Transform3D(1, 0, 1.49012e-08, 0, 1, -3.72529e-08, 0, -3.72529e-08, 1, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_2lr5d")
+
+[node name="Player" parent="." instance=ExtResource("1_8tcec")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02125, 0)
+collision_layer = 5
+
+[node name="Ground2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.0434899, -0.457857, -0.118746, 0.472872, 0.0449161, 0, 0.0112286, -0.118214, 0.459918, 6.4582, -1, 5.34452)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2"]
+transform = Transform3D(0.51, 0, 0, 0, 0.51, 0, 0, 0, 0.51, 0, 0, 0)
+shape = SubResource("BoxShape3D_62pq2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground2"]
+transform = Transform3D(0.51, -2.32831e-10, 0, -2.32831e-10, 0.51, -7.45058e-09, 0, 0, 0.51, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ono5p")
+mesh = SubResource("BoxMesh_chl6c")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-3.43, 0, -2.9986e-07, 0, 3.43, 0, 2.9986e-07, 0, -3.43, 0, 7.07057, 26.976)
+texture = ExtResource("4_psc8c")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.51339, -11.0576)
+collision_layer = 6
+input_capture_on_drag = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_ich28")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+material_override = SubResource("ShaderMaterial_tm2h3")
+mesh = SubResource("SphereMesh_xaevg")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -18.2752, 1.29543, 0)
+pixel_size = 0.1
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_tx8xg")
+autoplay = "default"
+frame_progress = 0.470447
+
+[node name="CharacterBody3D2" parent="." instance=ExtResource("6_ppunc")]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, -12.9893, 0, -11.5564)
+collision_layer = 5
+
+[node name="CharacterBody3D3" parent="." instance=ExtResource("7_tjhhn")]
+transform = Transform3D(-0.311127, 0, 0.311127, 0, 0.44, 0, -0.311127, 0, -0.311127, -21.8974, 0, 14.2484)
+collision_layer = 5
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.657309, -0.701201, 0.276154, -6.34675e-08, 0.366436, 0.930443, -0.753621, 0.611589, -0.240862, -18.3661, 11.6041, 11.1185)
+light_energy = 9.925
+light_volumetric_fog_energy = 5.72
+spot_range = 15.7962
+spot_angle = 41.9897
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.0130925, 0.901191, -0.433225, 0.0272224, 0.433423, 0.900779, 0.999544, 0, -0.0302072, -75, 185, -8)
+light_energy = 660.0
+light_volumetric_fog_energy = 0.39
+light_size = 44.148
+spot_range = 206.528
+spot_angle = 7.97276
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_smbrw")

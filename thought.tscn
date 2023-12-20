@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbl0pcbxkv67y"]
+
+[ext_resource type="Script" path="res://thought.gd" id="1_xgxrt"]
+
+[sub_resource type="SystemFont" id="SystemFont_n3n36"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_33v08"]
+font = SubResource("SystemFont_n3n36")
+font_size = 25
+
+[node name="thought" type="CanvasLayer"]
+script = ExtResource("1_xgxrt")
+
+[node name="textbox" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -143.0
+offset_right = 350.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.113725, 0.0352941, 0.152941, 0.639216)
+
+[node name="text" type="Label" parent="textbox"]
+texture_filter = 3
+layout_mode = 0
+offset_left = 40.0
+offset_top = 33.0
+offset_right = 128.0
+offset_bottom = 71.0
+label_settings = SubResource("LabelSettings_33v08")
+
+[node name="ttt" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="ttt" to="." method="_on_timer_timeout"]

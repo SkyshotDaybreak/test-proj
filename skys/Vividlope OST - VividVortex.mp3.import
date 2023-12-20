@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://y8304v5u1ljo"
+path="res://.godot/imported/Vividlope OST - VividVortex.mp3-150e7f68b5250849fd84601a617f2bcb.mp3str"
+
+[deps]
+
+source_file="res://skys/Vividlope OST - VividVortex.mp3"
+dest_files=["res://.godot/imported/Vividlope OST - VividVortex.mp3-150e7f68b5250849fd84601a617f2bcb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

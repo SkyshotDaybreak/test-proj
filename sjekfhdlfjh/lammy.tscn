@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4qajtd2j7hce"]
+
+[ext_resource type="ArrayMesh" uid="uid://bydjugjtxjq3u" path="res://sjekfhdlfjh/Lammy/lmy_lmy.spmout.obj" id="1_u7tmv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bqsbb"]
+size = Vector3(9.15747, 13.2477, 1)
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.76026, 0)
+shape = SubResource("BoxShape3D_bqsbb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_u7tmv")

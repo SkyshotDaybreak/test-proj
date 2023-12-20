@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl4um3twh5j0q"]
+
+[ext_resource type="ArrayMesh" uid="uid://56ildyol30ig" path="res://sjekfhdlfjh/Priscilla/c2730.obj" id="1_swn18"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hlx0q"]
+height = 2.99026
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.56, 0, 0, 0, 1.56, 0, 0, 0, 1.56, 0, 2.39626, 0)
+shape = SubResource("CapsuleShape3D_hlx0q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_swn18")
